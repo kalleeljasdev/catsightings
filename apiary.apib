@@ -1,0 +1,216 @@
+FORMAT: 1A
+HOST: http://api.catlog.net/
+
+# Cat Log API
+
+Provides services for cats log app
+
+# Group Cats
+Access to Cats resources
+
+## My Cats [/cats{?page,size}]
+### Get all cat sightings [GET]
+
++ Parameters
+    + page: 1 (number, required) page number
+    + size: 10 (number, required) - page size
++ Request
+
+    + Header 
+    
+                Authorization: Basic dXNlcjpwYXNzd29yZA==
+                x-api-version: 1.0
+    
++ Response 200 (application/json)
+
+    + Header
+    
+                ETag : "oeyoeyoeyoeyoey"
+                cache-control: max-age=600
+            
+    + Body
+    
+                {
+                    "page" :
+                    {
+                        "number" : 1,
+                        "size": 10,
+                        "totalPages": 20
+                    },
+                    "cats" : 
+                    [
+                        {
+                            "sightedAt": "2015-08-05T08:40",
+                            "imageUrl": "cat1.jpg",
+                            "description": "cute",
+                            "tags": [
+                                "black"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-08-20T08:40",
+                            "imageUrl": "cat2.jpg",
+                            "description": "awesome",
+                            "tags": [
+                                "yellow"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-07-05T08:40",
+                            "imageUrl": "cat3.jpg",
+                            "description": "sassy",
+                            "tags": [
+                                "turtoise"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-08-08T08:40",
+                            "imageUrl": "cat4.jpg",
+                            "description": "cute",
+                            "tags": [
+                                "white"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-09-20T08:40",
+                            "imageUrl": "cat5.jpg",
+                            "description": "awesome",
+                            "tags": [
+                                "yellow"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-10-05T08:40",
+                            "imageUrl": "cat6.jpg",
+                            "description": "sassy",
+                            "tags": [
+                                "turtoise"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-08-01T08:40",
+                            "imageUrl": "cat7.jpg",
+                            "description": "cute",
+                            "tags": [
+                                "red"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-08-25T08:40",
+                            "imageUrl": "cat8.jpg",
+                            "description": "awesome",
+                            "tags": [
+                                "white",
+                                "black"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-07-08T08:40",
+                            "imageUrl": "cat9.jpg",
+                            "description": "sassy",
+                            "tags": [
+                                "turtoise"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-08-25T08:40",
+                            "imageUrl": "cat10.jpg",
+                            "description": "awesome",
+                            "tags": [
+                                "white",
+                                "yellow"
+                            ]
+                        },
+                        {
+                            "sightedAt": "2015-07-08T08:40",
+                            "imageUrl": "cat11.jpg",
+                            "description": "burly",
+                            "tags": [
+                                "spotted"
+                            ]
+                        }
+                    ]
+                }
+
+
+## Create a new Cat [/cats]
+### Create a cat sighting [POST]
+
++ Request
+
+    + Header
+    
+            Authorization: Basic dXNlcjpwYXNzd29yZA==
+            Content-type: application/json
+            x-api-version: 1.0
+    
+    + Body
+
+            {
+                "sightedAt" : "2014-08-29T07:10",
+                "imageUrl" : "https://s3-eu-west-1.amazonaws.com/uid-19247681/201408/14562881209_046a7f4d3d_z.jpg",
+                "description" : "Another cat I saw on the bush",
+                "tags": [
+                    "stripy"
+                ]
+            }
+        
++ Response 201 
+
+    + Header
+    
+            Location : cats/abbd4122
+
+## One of my Cat sightings [/cats/{id}]
+### Get a Cat sighting [GET]
+
++ Parameters
+    + id: `aba443c` (string, required) - `id` of the spider sighting
+    
++ Request
+
+    + Header
+    
+            Authorization: Basic dXNlcjpwYXNzd29yZA==
+            x-api-version: 1.0
+        
++ Response 200 (application/json)
+
+    + Header
+    
+            ETag : "euyfewuyfvew76f7"
+            cache-control: max-age=600
+            
+    + Body
+
+            {
+                "sightedAt" : "2014-08-29T07:00",
+                "imageUrl" : "https://s3-eu-west-1.amazonaws.com/uid-19247681/201408/14562881209_046a7f4d3d_z.jpg",
+                "description" : "Spider I saw on the train",
+                "tags": [
+                    "stripy"
+                ]
+            }
+            
+            
+### Update a cats sighting [PUT]
+
++ Parameters
+    + id: `aba443c` (string, required) - `id` of the spider sighting
+    
++ Request
+
+    + Header
+    
+            Authorization: Basic dXNlcjpwYXNzd29yZA==
+            Content-type: application/json
+            x-api-version: 1.0
+            
+    + Body
+    
+            {
+                "sightedAt" : "2014-08-29T07:15",
+                "description" : "No, it was definitely different"
+            }
+        
++ Response 200
